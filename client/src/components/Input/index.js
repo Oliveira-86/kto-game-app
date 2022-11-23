@@ -1,6 +1,6 @@
 import React from "react";
 import theme from "../../global/theme";
-import { Label, InputStyle, ErrorMessage } from "./styles";
+import { Label, InputStyle } from "./styles";
 
 const Input = (props) => {
   return (
@@ -14,7 +14,6 @@ const Input = (props) => {
           placeholderTextColor={theme.colors.grey}
         />
       </Label>
-      {props.error && <ErrorMessage>{props.errorMessage}</ErrorMessage>}
     </>
   );
 };

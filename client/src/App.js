@@ -5,34 +5,34 @@ import Home from "./screens/Home";
 import { GlobalStyle } from "./global/Style";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect,
 } from "react-router-dom";
 import Auth from "./screens/Auth";
 import { store } from "./feature/store";
 import { Provider } from "react-redux";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
-  const user = JSON.parse(localStorage.getItem("profile"));
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Switch>
-            <Route>
-              <Auth />
-            </Route>
-          </Switch>
-        </Router>
-        <GlobalStyle whiteColor />
-      </ThemeProvider>
-    </Provider>
+    <>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Routes>
+              <Route exact path='/' element={<Auth/>} />
+              <Route exact path="/home" element={<Home/>} />
+            </Routes>
+          </Router>
+          <GlobalStyle whiteColor />
+        </ThemeProvider>
+      </Provider>
+      <ToastContainer />
+    </>
   );
 }
 
 export default App;
-//       {/* <Route path="/" exact component={() => <Redirect to="/home" />} />
-//       <Route path="/home" exact component={Home} /> */}
-//       <Route path="/auth" exact component={Home} />
