@@ -16,25 +16,21 @@ export const InputStyle = styled.input`
   color: ${({ theme }) => theme.colors.ice};
   background-color: ${({ theme }) => theme.colors.grey};
   border: none;
-  width: 92%;
+  width: 100%;
 
   @media ${devices.mobileL} {
-    width: 94%;
     font-size: 25px;
   }
 
   @media ${devices.tablet} {
-    width: 96%;
     font-size: 25px;
   }
 
   @media ${devices.laptop} {
-    width: 96%;
     font-size: 20px;
   }
 
   @media ${devices.laptopL} {
-    width: 94%;
     font-size: 20px;
   }
 `;

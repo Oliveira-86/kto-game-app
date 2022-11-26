@@ -43,9 +43,15 @@ const Auth = () => {
       if (isSignup) {
         const response = await dispatch(signup(form));
 
-        toast.error(response.payload.data.message, {
-          theme: "dark",
-        });
+        if (response.payload.data.message) {
+          toast.error(response.payload.data.message, {
+            theme: "dark",
+          });
+          return
+        }
+
+        setIsSignup(false);
+        setForm(initialState);
       } else {
         const response = await dispatch(login(form));
 
