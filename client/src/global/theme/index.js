@@ -7,7 +7,8 @@ export default {
       grey: '#525252',
       white: '#FFF',
       background: '#313131',
-      ice: '#EEEEEE'
+      ice: '#EEEEEE',
+      blue: '#5361C9'
     },
 
     fonts: {

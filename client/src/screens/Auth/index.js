@@ -42,7 +42,6 @@ const Auth = () => {
     try {
       if (isSignup) {
         const response = await dispatch(signup(form));
-        console.log("response: ", response);
 
         toast.error(response.payload.data.message, {
           theme: "dark",
@@ -72,7 +71,6 @@ const Auth = () => {
         );
       }
     } catch (error) {
-      console.error("Auth: ", error);
       toast.error("Something went wrong.", {
         theme: "dark",
       });

@@ -16,7 +16,6 @@ export const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.data = action.payload;
-      console.log("slice signin ===> ", action.payload);
       state.loading = false;
     },
     [login.rejected]: (state) => {

@@ -48,8 +48,6 @@ export const Title = styled.p`
   font-size: 30px;
   color: ${({ theme }) => theme.colors.ice};
   font-weight: ${({ theme }) => theme.fonts.bold};
-  @media ${devices.tablet} {
-  }
 `;
 
 export const ButtonText = styled.button`
