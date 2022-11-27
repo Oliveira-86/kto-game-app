@@ -14,7 +14,7 @@ import {
   ChartContainer,
   Centered,
   Content,
-  ChartContent
+  ChartContent,
 } from "./styles";
 
 import {
@@ -31,46 +31,30 @@ import theme from "../../global/theme";
 
 import logo from "../../assets/logo.png";
 import useWindowDimensions from "../../hooks/useWindowsDimensions";
+import {
+  onHandleChartHeight,
+  onHandleChartWidth,
+} from "../../helpers/responsivityCChartSize";
 
 const Home = () => {
+  const { height, width } = useWindowDimensions();
   const [chartData, setCharData] = useState([]);
   const [teamName, setTeamName] = useState([]);
   const [isLoading, setIsloading] = useState(false);
-  const { height, width } = useWindowDimensions();
+  const [chartWidth, setChartWidth] = useState(null);
+  const [chartHeight, setChartHeight] = useState(null);
 
   console.log(height, width);
   const dispatch = useDispatch();
 
-  const CHART_WIDTH =
-    width <= 360
-      ? 360
-      : width <= 425
-      ? 375
-      : width <= 558
-      ? 500
-      : width <= 768
-      ? 700
-      : width <= 1024
-      ? 790
-      : width <= 1024
-      ? 900
-      : width <= 1200 || width <= 1400
-      ? 750
-      : width > 1400
-      ? 900
-      : 0;
-  const CHART_HEIGHT =
-    width <= 360
-      ? 200
-      : width <= 425
-      ? 225
-      : width <= 558
-      ? 280
-      : width <= 768
-      ? 400
-      : 400;
-
   const { data } = useSelector((state) => state.teams);
+
+  useEffect(() => {
+    const w = onHandleChartWidth(width);
+    setChartWidth(w);
+    const h = onHandleChartHeight(width);
+    setChartHeight(h);
+  }, [width]);
 
   useEffect(() => {
     fetchTeams();
@@ -117,7 +101,7 @@ const Home = () => {
   };
 
   const Item = ({ name, src, alt }) => (
-    <ItemContainer onClick={() => onHandleDataChart(name)}  >
+    <ItemContainer onClick={() => onHandleDataChart(name)}>
       <Image src={src} alt={alt} />
       <Name>{name}</Name>
     </ItemContainer>
@@ -151,11 +135,7 @@ const Home = () => {
           <Title>{teamName}</Title>
 
           <ChartContainer>
-            <BarChart
-              width={CHART_WIDTH}
-              height={CHART_HEIGHT}
-              data={chartData}
-            >
+            <BarChart width={chartWidth} height={chartHeight} data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke={theme.colors.ice} />
               <XAxis dataKey="name" stroke={theme.colors.ice} />
               <YAxis stroke={theme.colors.ice} />
@@ -164,17 +144,17 @@ const Home = () => {
               <Bar
                 dataKey="home"
                 fill={theme.colors.primary}
-                barSize={CHART_WIDTH > 768 ? 60 : null}
+                barSize={chartWidth > 768 ? 60 : null}
               />
               <Bar
                 dataKey="away"
                 fill={theme.colors.secondary}
-                barSize={CHART_WIDTH > 768 ? 60 : null}
+                barSize={chartWidth > 768 ? 60 : null}
               />
               <Bar
                 dataKey="total"
                 fill={theme.colors.blue}
-                barSize={CHART_WIDTH > 768 ? 60 : null}
+                barSize={chartWidth > 768 ? 60 : null}
               />
             </BarChart>
           </ChartContainer>
